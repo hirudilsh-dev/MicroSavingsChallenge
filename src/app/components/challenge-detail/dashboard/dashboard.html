@@ -1,1 +1,150 @@
-<p>dashboard works!</p>
+<!-- This dashboard appears when the selected challenge exists. -->
+@if (challenge(); as selectedChallenge) {
+  <section class="dashboard-layout">
+    <!-- This grid displays the main savings statistics. -->
+    <div class="stats-grid">
+      <article class="stat-card featured">
+        <span class="stat-icon">💰</span>
+        <span class="stat-label">Total saved</span>
+        <strong>
+          {{ selectedChallenge.currency }}
+          {{ stats().totalSaved | number: '1.0-0' }}
+        </strong>
+        <small>Across all successful check-ins</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-icon soft-blue">✓</span>
+        <span class="stat-label">Success rate</span>
+        <strong>{{ stats().successRate | number: '1.0-0' }}%</strong>
+        <small>
+          {{ stats().savedCheckIns }} of {{ stats().totalCheckIns }}
+          check-ins completed
+        </small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-icon soft-orange">🔥</span>
+        <span class="stat-label">Current streak</span>
+        <strong>{{ stats().currentStreak }}</strong>
+        <small>
+          {{ stats().currentStreak === 1 ? 'successful check-in' : 'successful check-ins' }}
+        </small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-icon soft-purple">★</span>
+        <span class="stat-label">Best streak</span>
+        <strong>{{ stats().longestStreak }}</strong>
+        <small>
+          {{ stats().longestStreak === 1 ? 'successful check-in' : 'successful check-ins' }}
+        </small>
+      </article>
+    </div>
+
+    <!-- This section appears only when the user set a target amount. -->
+    @if (selectedChallenge.targetAmount) {
+      <section class="target-card">
+        <div class="target-heading">
+          <div>
+            <p class="section-eyebrow">SAVINGS TARGET</p>
+            <h2>Keep moving toward your goal</h2>
+          </div>
+
+          <strong>{{ targetProgress() | number: '1.0-0' }}%</strong>
+        </div>
+
+        <!-- This progress bar visualizes the savings target. -->
+        <div
+          class="progress-track"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [attr.aria-valuenow]="targetProgress()"
+          [attr.aria-label]="'Target progress: ' + (targetProgress() | number: '1.0-0') + '%'"
+        >
+          <div
+            class="progress-fill"
+            [style.width.%]="targetProgress()"
+          ></div>
+        </div>
+
+        <div class="target-footer">
+          <span>
+            {{ selectedChallenge.currency }}
+            {{ stats().totalSaved | number: '1.0-0' }} saved
+          </span>
+
+          <span>
+            {{ selectedChallenge.currency }}
+            {{ selectedChallenge.targetAmount | number: '1.0-0' }} target
+          </span>
+        </div>
+      </section>
+    }
+
+    <!-- This section lists recent check-in history. -->
+    <section class="activity-card">
+      <div class="activity-heading">
+        <div>
+          <p class="section-eyebrow">RECENT ACTIVITY</p>
+          <h2>Your check-in history</h2>
+        </div>
+
+        <span class="activity-count">
+          {{ checkIns().length }}
+          {{ checkIns().length === 1 ? 'record' : 'records' }}
+        </span>
+      </div>
+
+      <!-- This state appears before the user saves the first check-in. -->
+      @if (recentCheckIns().length === 0) {
+        <div class="empty-activity">
+          <span>📊</span>
+          <h3>No check-ins yet</h3>
+          <p>Complete your first check-in to see your progress here.</p>
+        </div>
+      } @else {
+        <div class="activity-list">
+          <!-- This loop displays the five most recent check-ins. -->
+          @for (checkIn of recentCheckIns(); track checkIn.id) {
+            <article class="activity-row">
+              <span
+                class="activity-icon"
+                [class.saved]="checkIn.saved"
+                [class.not-saved]="!checkIn.saved"
+              >
+                {{ checkIn.saved ? '✓' : '—' }}
+              </span>
+
+              <div class="activity-details">
+                <strong>{{ getCheckInStatus(checkIn) }}</strong>
+                <span>{{ checkIn.date | date: 'EEE, dd MMM yyyy' }}</span>
+
+                @if (!checkIn.saved && checkIn.reason) {
+                  <small>{{ checkIn.reason }}</small>
+                }
+              </div>
+
+              <div class="activity-amount">
+                @if (checkIn.saved) {
+                  <strong>
+                    + {{ selectedChallenge.currency }}
+                    {{ getCheckInAmount(checkIn) | number: '1.0-0' }}
+                  </strong>
+                } @else {
+                  <span>{{ selectedChallenge.currency }} 0</span>
+                }
+              </div>
+            </article>
+          }
+        </div>
+      }
+    </section>
+  </section>
+} @else {
+  <!-- This card appears when challenge data is unavailable. -->
+  <section class="loading-card">
+    <p>Loading dashboard...</p>
+  </section>
+}

@@ -7,12 +7,13 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CheckIn } from './check-in/check-in';
 import { Savings } from '../../services/savings';
+import { Dashboard } from './dashboard/dashboard';
 
 type ChallengeTab = 'check-in' | 'dashboard' | 'reflection';
 
 @Component({
   selector: 'app-challenge-detail',
-  imports: [DecimalPipe, CheckIn],
+  imports: [DecimalPipe, CheckIn, Dashboard],
   templateUrl: './challenge-detail.html',
   styleUrl: './challenge-detail.css'
 })

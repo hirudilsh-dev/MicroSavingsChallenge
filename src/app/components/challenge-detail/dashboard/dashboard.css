@@ -1,0 +1,316 @@
+/* This layout stacks dashboard sections with consistent spacing. */
+.dashboard-layout {
+  display: grid;
+  gap: 22px;
+}
+
+/* This grid displays the four statistics cards. */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* This is the base style for a statistics card. */
+.stat-card {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+  box-shadow: 0 5px 16px rgba(15, 23, 42, 0.04);
+}
+
+/* This style highlights the total saved card. */
+.stat-card.featured {
+  border-color: #99f6e4;
+  background: #f0fdfa;
+}
+
+/* This icon provides a visual label for each statistic. */
+.stat-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  background: #ccfbf1;
+  font-size: 1rem;
+}
+
+/* This icon color is used for the success rate card. */
+.stat-icon.soft-blue {
+  background: #dbeafe;
+}
+
+/* This icon color is used for the current streak card. */
+.stat-icon.soft-orange {
+  background: #ffedd5;
+}
+
+/* This icon color is used for the best streak card. */
+.stat-icon.soft-purple {
+  background: #ede9fe;
+}
+
+/* This label explains the number in each statistics card. */
+.stat-label {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* This is the main number in each statistics card. */
+.stat-card strong {
+  margin: 5px 0;
+  color: var(--text);
+  font-size: 1.5rem;
+  letter-spacing: -0.03em;
+}
+
+/* This text gives more detail below each main number. */
+.stat-card small {
+  color: var(--muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+/* This card visualizes progress toward the target amount. */
+.target-card {
+  padding: 24px;
+  border: 1px solid #a7f3d0;
+  border-radius: 17px;
+  background: #f0fdfa;
+}
+
+/* This row displays the target title and percentage. */
+.target-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+/* This is the small label above target title. */
+.section-eyebrow {
+  margin: 0 0 6px;
+  color: #0f766e;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+/* This is the target section title. */
+.target-heading h2,
+.activity-heading h2 {
+  margin: 0;
+  color: #134e4a;
+  font-size: 1.08rem;
+}
+
+/* This is the target progress percentage. */
+.target-heading > strong {
+  color: #0f766e;
+  font-size: 1.55rem;
+}
+
+/* This is the background of the target progress bar. */
+.progress-track {
+  overflow: hidden;
+  height: 12px;
+  border-radius: 999px;
+  background: #ccfbf1;
+}
+
+/* This is the filled portion of target progress bar. */
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: #0f766e;
+  transition: width 240ms ease;
+}
+
+/* This row shows saved and target amounts. */
+.target-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 10px;
+  color: #115e59;
+  font-size: 0.84rem;
+  font-weight: 700;
+}
+
+/* This card contains the recent check-in history. */
+.activity-card {
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 17px;
+  background: var(--surface);
+}
+
+/* This row displays the activity title and record count. */
+.activity-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+/* This record count badge appears in activity heading. */
+.activity-count {
+  padding: 5px 9px;
+  border-radius: 999px;
+  color: #475569;
+  background: #e2e8f0;
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+/* This section appears when there are no check-in records. */
+.empty-activity {
+  padding: 26px 18px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 13px;
+  color: var(--muted);
+  background: #f8fafc;
+  text-align: center;
+}
+
+/* This is the empty-state icon. */
+.empty-activity > span {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 1.6rem;
+}
+
+/* This is the empty-state title. */
+.empty-activity h3 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1rem;
+}
+
+/* This is the empty-state description. */
+.empty-activity p {
+  margin: 7px 0 0;
+  font-size: 0.87rem;
+}
+
+/* This list holds individual check-in history rows. */
+.activity-list {
+  display: grid;
+}
+
+/* This is one check-in history row. */
+.activity-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 0;
+  border-top: 1px solid #e2e8f0;
+}
+
+/* This icon indicates saved or not-saved status. */
+.activity-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  font-weight: 900;
+}
+
+/* This green icon indicates a successful check-in. */
+.activity-icon.saved {
+  color: #166534;
+  background: #dcfce7;
+}
+
+/* This grey icon indicates an unsuccessful check-in. */
+.activity-icon.not-saved {
+  color: #475569;
+  background: #e2e8f0;
+}
+
+/* This section holds status, date, and optional reason text. */
+.activity-details {
+  display: grid;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* This is the check-in date text. */
+.activity-details span,
+.activity-details small {
+  overflow: hidden;
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* This is the amount displayed at the right side of an activity row. */
+.activity-amount {
+  color: #166534;
+  font-size: 0.87rem;
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* This grey style is used for a not-saved amount. */
+.activity-amount span {
+  color: var(--muted);
+}
+
+/* This card appears when challenge data is unavailable. */
+.loading-card {
+  padding: 26px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  color: var(--muted);
+  background: var(--surface);
+  text-align: center;
+}
+
+/* These styles make the dashboard responsive on tablets. */
+@media (max-width: 850px) {
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* These styles make the dashboard responsive on mobile screens. */
+@media (max-width: 520px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .target-card,
+  .activity-card {
+    padding: 20px 16px;
+  }
+
+  .target-heading,
+  .activity-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .target-footer {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .activity-row {
+    align-items: flex-start;
+  }
+}

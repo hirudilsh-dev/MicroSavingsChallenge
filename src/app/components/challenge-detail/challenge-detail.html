@@ -102,14 +102,9 @@
         <app-check-in [challengeId]="challengeId" />
       }
 
+      <!-- This child component displays challenge statistics and activity. -->
       @if (activeTab() === 'dashboard') {
-        <div class="placeholder-card">
-          <span class="placeholder-icon">↗</span>
-          <h2>Your progress dashboard</h2>
-          <p>
-            View totals, consistency, streaks, and progress toward your goal.
-          </p>
-        </div>
+        <app-dashboard [challengeId]="challengeId" />
       }
 
       @if (activeTab() === 'reflection') {
