@@ -1,0 +1,271 @@
+/* This layout stacks the reflection editor and summary card. */
+.reflection-layout {
+  display: grid;
+  gap: 22px;
+}
+
+/* This card contains the textarea and save controls. */
+.reflection-editor-card {
+  padding: 26px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+}
+
+/* This row contains editor text and the decorative icon. */
+.editor-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+/* This is the small label above a reflection section title. */
+.eyebrow {
+  margin: 0 0 7px;
+  color: #7c3aed;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+/* This is the reflection editor title. */
+h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+/* This is the reflection editor supporting description. */
+.editor-heading p:not(.eyebrow) {
+  max-width: 560px;
+  margin: 8px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* This decorative icon appears at the top-right of the editor. */
+.editor-icon,
+.story-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 13px;
+  background: #ede9fe;
+  font-size: 1.2rem;
+}
+
+/* This message confirms a successful reflection save. */
+.success-message {
+  margin-bottom: 18px;
+  padding: 11px 13px;
+  border: 1px solid #c4b5fd;
+  border-radius: 10px;
+  color: #5b21b6;
+  background: #f5f3ff;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+/* This is the textarea label. */
+.reflection-editor-card > label {
+  display: block;
+  margin-bottom: 8px;
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
+/* This textarea allows the user to type a reflection. */
+.reflection-input {
+  width: 100%;
+  min-height: 150px;
+  padding: 13px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  outline: none;
+  color: var(--text);
+  line-height: 1.55;
+  resize: vertical;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+/* This effect highlights the textarea when it has focus. */
+.reflection-input:focus {
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.12);
+}
+
+/* This row displays character count and clear action. */
+.editor-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+/* This button clears only the draft text field. */
+.clear-button {
+  padding: 4px 0;
+  border: 0;
+  color: #7c3aed;
+  background: transparent;
+  font-size: 0.78rem;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+/* This button saves the reflection text. */
+.save-button {
+  margin-top: 20px;
+  padding: 12px 17px;
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  background: #7c3aed;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+/* This effect gives feedback when the save button is hovered. */
+.save-button:hover {
+  background: #6d28d9;
+  transform: translateY(-1px);
+}
+
+/* This card summarizes the user's saving journey. */
+.story-card {
+  padding: 26px;
+  border: 1px solid #ddd6fe;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top right, rgba(196, 181, 253, 0.45), transparent 34%),
+    #faf5ff;
+}
+
+/* This row contains story title and the decorative icon. */
+.story-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+}
+
+/* This text summarizes the total saved and check-in count. */
+.story-summary {
+  max-width: 610px;
+  margin: 20px 0 16px;
+  color: #475569;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+/* This block displays the saved reflection quote. */
+blockquote {
+  margin: 0;
+  padding: 16px 18px;
+  border-left: 4px solid #8b5cf6;
+  border-radius: 0 10px 10px 0;
+  color: #4c1d95;
+  background: rgba(255, 255, 255, 0.68);
+  font-size: 1rem;
+  font-style: italic;
+  line-height: 1.65;
+}
+
+/* This grid displays reflection summary statistics. */
+.story-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 18px;
+}
+
+/* This card displays one reflection statistic. */
+.story-stats > div {
+  display: grid;
+  gap: 5px;
+  padding: 13px;
+  border: 1px solid #e9d5ff;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.74);
+}
+
+/* This is the reflection statistic label. */
+.story-stats span {
+  color: #7e22ce;
+  font-size: 0.76rem;
+  font-weight: 750;
+}
+
+/* This is the reflection statistic value. */
+.story-stats strong {
+  color: #4c1d95;
+  font-size: 1.1rem;
+}
+
+/* This card appears before the user saves a reflection. */
+.story-empty-card {
+  padding: 28px;
+  border: 1px dashed #c4b5fd;
+  border-radius: 17px;
+  color: #6b21a8;
+  background: #faf5ff;
+  text-align: center;
+}
+
+/* This is the icon inside the empty reflection card. */
+.story-empty-card > span {
+  display: block;
+  margin-bottom: 9px;
+  font-size: 1.7rem;
+}
+
+/* This is the empty reflection card title. */
+.story-empty-card h2 {
+  color: #581c87;
+  font-size: 1.1rem;
+}
+
+/* This is the empty reflection card text. */
+.story-empty-card p {
+  max-width: 440px;
+  margin: 8px auto 0;
+  color: #7e22ce;
+  line-height: 1.55;
+}
+
+/* This card appears while reflection data is unavailable. */
+.loading-card {
+  padding: 26px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  color: var(--muted);
+  background: var(--surface);
+  text-align: center;
+}
+
+/* These styles adjust reflection layout for smaller screens. */
+@media (max-width: 560px) {
+  .reflection-editor-card,
+  .story-card {
+    padding: 21px 17px;
+  }
+
+  .editor-heading,
+  .story-heading {
+    flex-direction: column;
+  }
+
+  .story-stats {
+    grid-template-columns: 1fr;
+  }
+}

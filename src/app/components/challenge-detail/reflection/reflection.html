@@ -1,1 +1,115 @@
-<p>reflection works!</p>
+<!-- This component appears when the selected challenge exists. -->
+@if (challenge(); as selectedChallenge) {
+  <section class="reflection-layout">
+    <!-- This card lets the user write and save a reflection. -->
+    <section class="reflection-editor-card">
+      <div class="editor-heading">
+        <div>
+          <p class="eyebrow">YOUR WHY</p>
+          <h2>What are you saving for?</h2>
+          <p>
+            A clear reason can make it easier to stay consistent on difficult days.
+          </p>
+        </div>
+
+        <span class="editor-icon">✦</span>
+      </div>
+
+      <!-- This confirmation appears after the reflection is saved. -->
+      @if (showSuccessMessage()) {
+        <div class="success-message" role="status">
+          Your reflection was saved successfully.
+        </div>
+      }
+
+      <label for="reflectionText">Your reflection</label>
+
+      <textarea
+        id="reflectionText"
+        class="reflection-input"
+        rows="6"
+        maxlength="500"
+        placeholder="Example: I am saving for a new laptop so I can improve my skills and work on my own projects."
+        [ngModel]="reflectionText()"
+        (ngModelChange)="updateReflectionText($event)"
+      ></textarea>
+
+      <div class="editor-footer">
+        <span>{{ reflectionText().length }} / 500 characters</span>
+
+        <button class="clear-button" type="button" (click)="clearDraft()">
+          Clear text
+        </button>
+      </div>
+
+      <button class="save-button" type="button" (click)="saveReflection()">
+        {{ hasReflection() ? 'Update reflection' : 'Save reflection' }}
+      </button>
+    </section>
+
+    <!-- This summary card appears only after reflection has been saved. -->
+    @if (hasReflection()) {
+      <section class="story-card">
+        <div class="story-heading">
+          <div>
+            <p class="eyebrow">YOUR MICRO-SAVINGS STORY</p>
+            <h2>Every small step adds up</h2>
+          </div>
+
+          <span class="story-icon">🌱</span>
+        </div>
+
+        <p class="story-summary">
+          You have saved
+          <strong>
+            {{ selectedChallenge.currency }}
+            {{ stats().totalSaved | number: '1.0-0' }}
+          </strong>
+          through
+          <strong>{{ stats().savedCheckIns }}</strong>
+          successful check-ins.
+        </p>
+
+        <blockquote>
+          “{{ savedReflection()?.text }}”
+        </blockquote>
+
+        <div class="story-stats">
+          <div>
+            <span>Success rate</span>
+            <strong>{{ stats().successRate | number: '1.0-0' }}%</strong>
+          </div>
+
+          <div>
+            <span>Best streak</span>
+            <strong>{{ stats().longestStreak }}</strong>
+          </div>
+
+          @if (selectedChallenge.targetAmount) {
+            <div>
+              <span>Target</span>
+              <strong>
+                {{ selectedChallenge.currency }}
+                {{ selectedChallenge.targetAmount | number: '1.0-0' }}
+              </strong>
+            </div>
+          }
+        </div>
+      </section>
+    } @else {
+      <!-- This message appears before the user saves a reflection. -->
+      <section class="story-empty-card">
+        <span>💡</span>
+        <h2>Your motivation belongs here</h2>
+        <p>
+          Write a short note about what this saving challenge will help you achieve.
+        </p>
+      </section>
+    }
+  </section>
+} @else {
+  <!-- This card appears while challenge data is unavailable. -->
+  <section class="loading-card">
+    <p>Loading reflection...</p>
+  </section>
+}

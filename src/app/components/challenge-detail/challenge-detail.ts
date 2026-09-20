@@ -8,12 +8,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CheckIn } from './check-in/check-in';
 import { Savings } from '../../services/savings';
 import { Dashboard } from './dashboard/dashboard';
+import { Reflection } from './reflection/reflection';
 
 type ChallengeTab = 'check-in' | 'dashboard' | 'reflection';
 
 @Component({
   selector: 'app-challenge-detail',
-  imports: [DecimalPipe, CheckIn, Dashboard],
+  imports: [DecimalPipe, CheckIn, Dashboard, Reflection],
   templateUrl: './challenge-detail.html',
   styleUrl: './challenge-detail.css'
 })

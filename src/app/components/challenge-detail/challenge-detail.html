@@ -107,14 +107,9 @@
         <app-dashboard [challengeId]="challengeId" />
       }
 
+      <!-- This child component saves the user's personal savings reflection. -->
       @if (activeTab() === 'reflection') {
-        <div class="placeholder-card">
-          <span class="placeholder-icon">✦</span>
-          <h2>Your savings reflection</h2>
-          <p>
-            Write what this saving habit is helping you achieve.
-          </p>
-        </div>
+        <app-reflection [challengeId]="challengeId" />
       }
     </section>
 
