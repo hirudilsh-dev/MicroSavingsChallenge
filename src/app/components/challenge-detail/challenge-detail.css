@@ -1,0 +1,303 @@
+/* This container centers the challenge detail page. */
+.page-shell {
+  width: min(100% - 32px, 980px);
+  margin: 0 auto;
+  padding: 32px 0 56px;
+}
+
+/* This button returns the user to the home page. */
+.back-button {
+  margin-bottom: 20px;
+  padding: 0;
+  border: 0;
+  color: var(--primary);
+  background: transparent;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+/* This header contains challenge information and the total saved card. */
+.challenge-header {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 34px;
+  border-radius: 22px;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at top right, rgba(125, 211, 252, 0.34), transparent 36%),
+    linear-gradient(135deg, #0f766e, #0f766e 40%, #0f766e);
+  box-shadow: 0 18px 38px rgba(15, 118, 110, 0.18);
+}
+
+/* This container holds the title and description. */
+.header-content {
+  flex: 1;
+}
+
+/* This is the small label above the challenge name. */
+.eyebrow {
+  margin: 0 0 9px;
+  color: #99f6e4;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* This is the selected challenge title. */
+.challenge-header h1 {
+  margin: 0;
+  font-size: clamp(1.9rem, 4vw, 2.8rem);
+  letter-spacing: -0.04em;
+}
+
+/* This describes the saving amount and frequency. */
+.challenge-description {
+  max-width: 600px;
+  margin: 12px 0 0;
+  color: #ccfbf1;
+  line-height: 1.65;
+}
+
+/* This card displays the total saved amount. */
+.total-card {
+  display: flex;
+  min-width: 190px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* This is the total card label. */
+.total-card span {
+  color: #ccfbf1;
+  font-size: 0.82rem;
+}
+
+/* This is the total saved amount. */
+.total-card strong {
+  margin: 6px 0;
+  color: #ffffff;
+  font-size: 1.65rem;
+}
+
+/* This is the optional goal text below the total. */
+.total-card small {
+  color: #ccfbf1;
+}
+
+/* This section displays progress to a target amount. */
+.goal-section {
+  margin-top: 22px;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+
+/* This row displays goal labels and percentage. */
+.goal-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+
+/* This is the goal section title. */
+.goal-heading h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+/* This is the goal amount description. */
+.goal-heading p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+/* This is the progress percentage label. */
+.goal-heading strong {
+  color: #0f766e;
+  font-size: 1.25rem;
+}
+
+/* This is the empty background of the progress bar. */
+.progress-track {
+  overflow: hidden;
+  height: 12px;
+  border-radius: 999px;
+  background: #ccfbf1;
+}
+
+/* This is the filled part of the progress bar. */
+.progress-fill {
+  height: 100%;
+  border-radius: inherit;
+  background: #0f766e;
+  transition: width 250ms ease;
+}
+
+/* This navigation holds the three tab buttons. */
+.tab-list {
+  display: flex;
+  gap: 8px;
+  margin-top: 28px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* This is one tab button. */
+.tab-button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 9px;
+  color: var(--muted);
+  background: transparent;
+  font-weight: 750;
+  cursor: pointer;
+  transition: color 160ms ease, background 160ms ease;
+}
+
+/* This style highlights the selected tab. */
+.tab-button.active {
+  color: #0f766e;
+  background: #ccfbf1;
+}
+
+/* This area holds the selected tab content. */
+.tab-content {
+  margin-top: 20px;
+}
+
+/* This temporary card describes each future tab feature. */
+.placeholder-card {
+  padding: 32px;
+  border: 1px dashed #a7f3d0;
+  border-radius: 16px;
+  background: #f0fdfa;
+  text-align: center;
+}
+
+/* This is the icon inside each temporary card. */
+.placeholder-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  margin: 0 auto 12px;
+  border-radius: 50%;
+  color: #ffffff;
+  background: #0f766e;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+/* This is the temporary card title. */
+.placeholder-card h2 {
+  margin: 0;
+  color: #134e4a;
+  font-size: 1.1rem;
+}
+
+/* This is the temporary card description. */
+.placeholder-card p {
+  max-width: 460px;
+  margin: 9px auto 0;
+  color: #115e59;
+  line-height: 1.6;
+}
+
+/* This button opens the new challenge page. */
+.create-another-button {
+  display: block;
+  margin: 24px auto 0;
+  padding: 10px 14px;
+  border: 0;
+  color: var(--primary);
+  background: transparent;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+/* This container centers the not-found content. */
+.not-found-shell {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 24px;
+}
+
+/* This card explains that the challenge was not found. */
+.not-found-card {
+  max-width: 440px;
+  padding: 34px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+  text-align: center;
+  box-shadow: 0 14px 35px rgba(15, 23, 42, 0.08);
+}
+
+/* This is the not-found icon. */
+.not-found-icon {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 2rem;
+}
+
+/* This is the not-found title. */
+.not-found-card h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* This is the not-found description. */
+.not-found-card p {
+  margin: 10px 0 20px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* This button returns the user to the home page. */
+.primary-button {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 16px;
+  color: #ffffff;
+  background: var(--primary);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* These styles adjust the page for smaller screens. */
+@media (max-width: 680px) {
+  .page-shell {
+    width: min(100% - 24px, 980px);
+    padding-top: 20px;
+  }
+
+  .challenge-header {
+    flex-direction: column;
+    padding: 26px 22px;
+  }
+
+  .total-card {
+    min-width: 0;
+  }
+
+  .goal-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .tab-list {
+    overflow-x: auto;
+  }
+}

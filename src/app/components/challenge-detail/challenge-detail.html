@@ -1,1 +1,155 @@
-<p>challenge-detail works!</p>
+<!-- This page is shown only when the selected challenge exists. -->
+@if (challenge(); as selectedChallenge) {
+  <main class="page-shell">
+    <!-- This button returns the user to the home page. -->
+    <button class="back-button" type="button" (click)="goHome()">
+      ← All challenges
+    </button>
+
+    <!-- This header shows the selected challenge information. -->
+    <section class="challenge-header">
+      <div class="header-content">
+        <p class="eyebrow">ACTIVE SAVINGS CHALLENGE</p>
+
+        <h1>{{ selectedChallenge.name }}</h1>
+
+        <p class="challenge-description">
+          Save {{ selectedChallenge.currency }} {{ selectedChallenge.amount }}
+          {{ selectedChallenge.period === 'daily' ? 'every day' : 'every week' }}
+          and build your financial habit.
+        </p>
+      </div>
+
+      <!-- This card provides a quick total saved summary. -->
+      <div class="total-card">
+        <span>Total saved</span>
+        <strong>{{ selectedChallenge.currency }} {{ stats().totalSaved }}</strong>
+
+        @if (selectedChallenge.targetAmount) {
+          <small>
+            Goal: {{ selectedChallenge.currency }} {{ selectedChallenge.targetAmount }}
+          </small>
+        }
+      </div>
+    </section>
+
+    <!-- Show goal progress only when the user provided a target amount. -->
+    @if (selectedChallenge.targetAmount) {
+      <section class="goal-section">
+        <div class="goal-heading">
+          <div>
+            <h2>Goal progress</h2>
+            <p>
+              {{ selectedChallenge.currency }} {{ stats().totalSaved }}
+              of {{ selectedChallenge.currency }} {{ selectedChallenge.targetAmount }}
+            </p>
+          </div>
+
+          <strong>{{ goalProgress() | number: '1.0-0' }}%</strong>
+        </div>
+
+        <!-- This progress bar width is calculated from goalProgress. -->
+        <div
+          class="progress-track"
+          [attr.aria-label]="'Goal progress: ' + (goalProgress() | number: '1.0-0') + '%'"
+          role="progressbar"
+          aria-valuemin="0"
+          aria-valuemax="100"
+          [attr.aria-valuenow]="goalProgress()"
+        >
+          <div
+            class="progress-fill"
+            [style.width.%]="goalProgress()"
+          ></div>
+        </div>
+      </section>
+    }
+
+    <!-- These buttons allow the user to switch between page sections. -->
+    <nav class="tab-list" aria-label="Challenge sections">
+      <button
+        class="tab-button"
+        type="button"
+        [class.active]="activeTab() === 'check-in'"
+        (click)="selectTab('check-in')"
+      >
+        Check-in
+      </button>
+
+      <button
+        class="tab-button"
+        type="button"
+        [class.active]="activeTab() === 'dashboard'"
+        (click)="selectTab('dashboard')"
+      >
+        Dashboard
+      </button>
+
+      <button
+        class="tab-button"
+        type="button"
+        [class.active]="activeTab() === 'reflection'"
+        (click)="selectTab('reflection')"
+      >
+        Reflection
+      </button>
+    </nav>
+
+    <!-- This area changes when the user selects a tab. -->
+    <section class="tab-content">
+      @if (activeTab() === 'check-in') {
+        <div class="placeholder-card">
+          <span class="placeholder-icon">✓</span>
+          <h2>Daily check-in</h2>
+          <p>
+            Record whether you saved today and keep your habit moving forward.
+          </p>
+        </div>
+      }
+
+      @if (activeTab() === 'dashboard') {
+        <div class="placeholder-card">
+          <span class="placeholder-icon">↗</span>
+          <h2>Your progress dashboard</h2>
+          <p>
+            View totals, consistency, streaks, and progress toward your goal.
+          </p>
+        </div>
+      }
+
+      @if (activeTab() === 'reflection') {
+        <div class="placeholder-card">
+          <span class="placeholder-icon">✦</span>
+          <h2>Your savings reflection</h2>
+          <p>
+            Write what this saving habit is helping you achieve.
+          </p>
+        </div>
+      }
+    </section>
+
+    <!-- This secondary action lets the user create another plan. -->
+    <button
+      class="create-another-button"
+      type="button"
+      (click)="createAnotherChallenge()"
+    >
+      + Create another challenge
+    </button>
+  </main>
+} @else {
+  <!-- This page appears when a challenge ID does not exist. -->
+  <main class="not-found-shell">
+    <section class="not-found-card">
+      <span class="not-found-icon">🔎</span>
+      <h1>Challenge not found</h1>
+      <p>
+        This challenge may have been removed, or the link may be incorrect.
+      </p>
+
+      <button class="primary-button" type="button" (click)="goHome()">
+        Go to home
+      </button>
+    </section>
+  </main>
+}
