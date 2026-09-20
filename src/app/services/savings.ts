@@ -163,35 +163,138 @@ export class Savings {
     });
   }
 
-  // This function calculates current and longest consecutive saving streaks.
+  // This function calculates current and longest streaks using calendar dates.
   private calculateStreaks(checkIns: CheckIn[]): {
     current: number;
     longest: number;
   } {
-    let current = 0;
+    // Sort records from oldest to newest for longest streak calculation.
+    const oldestFirst = [...checkIns].sort((first, second) =>
+      first.date.localeCompare(second.date)
+    );
+
     let longest = 0;
     let activeRun = 0;
+    let previousSavedDate: string | null = null;
 
-    // Read records from newest to oldest.
-    for (const checkIn of checkIns) {
-      if (checkIn.saved) {
-        activeRun += 1;
-        longest = Math.max(longest, activeRun);
-      } else {
+    // Calculate the longest consecutive sequence of saved calendar days.
+    for (const checkIn of oldestFirst) {
+      // A not-saved record always breaks the active streak.
+      if (!checkIn.saved) {
         activeRun = 0;
+        previousSavedDate = null;
+        continue;
+      }
+
+      // Start a new streak when this is the first saved record.
+      if (!previousSavedDate) {
+        activeRun = 1;
+        previousSavedDate = checkIn.date;
+        longest = Math.max(longest, activeRun);
+        continue;
+      }
+
+      const dayDifference = this.getCalendarDayDifference(
+        previousSavedDate,
+        checkIn.date
+      );
+
+      // Continue streak only when this record is exactly the next calendar day.
+      if (dayDifference === 1) {
+        activeRun += 1;
+      } else {
+        // Start a new streak after a gap or duplicate date.
+        activeRun = 1;
+      }
+
+      previousSavedDate = checkIn.date;
+      longest = Math.max(longest, activeRun);
+    }
+
+    // Sort records from newest to oldest for current streak calculation.
+    const newestFirst = [...checkIns].sort((first, second) =>
+      second.date.localeCompare(first.date)
+    );
+
+    let current = 0;
+    let expectedDate = this.getTodayDate();
+
+    // Allow a streak to continue from yesterday when today has no record yet.
+    const newestRecord = newestFirst[0];
+    if (newestRecord && newestRecord.date !== expectedDate) {
+      const differenceFromToday = this.getCalendarDayDifference(
+        newestRecord.date,
+        expectedDate
+      );
+
+      // Start from the newest record only when it was saved yesterday.
+      if (differenceFromToday === 1) {
+        expectedDate = newestRecord.date;
+      } else {
+        return { current: 0, longest };
       }
     }
 
-    // Count only the successful records at the top as current streak.
-    for (const checkIn of checkIns) {
+    // Count saved records that match each expected calendar day.
+    for (const checkIn of newestFirst) {
+      // Ignore records newer than the date currently being checked.
+      if (checkIn.date > expectedDate) {
+        continue;
+      }
+
+      // Stop when a record does not match the expected calendar day.
+      if (checkIn.date !== expectedDate) {
+        break;
+      }
+
+      // Stop when the expected day was not saved.
       if (!checkIn.saved) {
         break;
       }
 
       current += 1;
+      expectedDate = this.getPreviousDate(expectedDate);
     }
 
     return { current, longest };
+  }
+
+  // This function returns today's date using local calendar values.
+  private getTodayDate(): string {
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth() + 1).padStart(2, '0');
+    const day = String(today.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  }
+
+  // This function returns the date one calendar day before a given date.
+  private getPreviousDate(date: string): string {
+    const [year, month, day] = date.split('-').map(Number);
+
+    // Create the date at UTC midnight to avoid timezone changes.
+    const utcDate = new Date(Date.UTC(year, month - 1, day));
+
+    // Move the date backward by one calendar day.
+    utcDate.setUTCDate(utcDate.getUTCDate() - 1);
+
+    return utcDate.toISOString().slice(0, 10);
+  }
+
+  // This function returns the number of calendar days between two date strings.
+  private getCalendarDayDifference(firstDate: string, secondDate: string): number {
+    const [firstYear, firstMonth, firstDay] = firstDate.split('-').map(Number);
+    const [secondYear, secondMonth, secondDay] = secondDate.split('-').map(Number);
+
+    // Convert both date-only values to UTC midnight timestamps.
+    const firstTimestamp = Date.UTC(firstYear, firstMonth - 1, firstDay);
+    const secondTimestamp = Date.UTC(secondYear, secondMonth - 1, secondDay);
+
+    // Divide millisecond difference by one calendar day.
+    return Math.round(
+      (secondTimestamp - firstTimestamp) / (1000 * 60 * 60 * 24)
+    );
   }
 
   // This function deletes a challenge and all data connected to it.
