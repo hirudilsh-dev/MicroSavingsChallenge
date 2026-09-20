@@ -97,14 +97,9 @@
 
     <!-- This area changes when the user selects a tab. -->
     <section class="tab-content">
+      <!-- This child component handles the saving check-in form. -->
       @if (activeTab() === 'check-in') {
-        <div class="placeholder-card">
-          <span class="placeholder-icon">✓</span>
-          <h2>Daily check-in</h2>
-          <p>
-            Record whether you saved today and keep your habit moving forward.
-          </p>
-        </div>
+        <app-check-in [challengeId]="challengeId" />
       }
 
       @if (activeTab() === 'dashboard') {

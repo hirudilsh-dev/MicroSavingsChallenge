@@ -1,1 +1,108 @@
-<p>check-in works!</p>
+<!-- This card lets the user record the current saving status. -->
+@if (challenge(); as selectedChallenge) {
+  <section class="check-in-card">
+    <div class="check-in-header">
+      <div>
+        <p class="eyebrow">TODAY'S CHECK-IN</p>
+        <h2>Did you save today?</h2>
+        <p class="date-text">{{ today }}</p>
+      </div>
+
+      <!-- This badge shows whether today's record was saved already. -->
+      @if (todayCheckIn()) {
+        <span class="status-badge">Updated today</span>
+      } @else {
+        <span class="status-badge neutral">Not recorded</span>
+      }
+    </div>
+
+    <!-- This success message appears after a check-in is saved. -->
+    @if (showSuccessMessage()) {
+      <div class="success-message" role="status">
+        Your check-in was saved successfully.
+      </div>
+    }
+
+    <!-- These two buttons choose the saving status. -->
+    <div class="choice-grid">
+      <button
+        class="choice-button"
+        type="button"
+        [class.selected]="saved()"
+        (click)="chooseSaved()"
+      >
+        <span class="choice-icon success">✓</span>
+        <span>
+          <strong>Yes, I saved</strong>
+          <small>I put money aside today</small>
+        </span>
+      </button>
+
+      <button
+        class="choice-button"
+        type="button"
+        [class.selected]="!saved()"
+        (click)="chooseNotSaved()"
+      >
+        <span class="choice-icon muted">—</span>
+        <span>
+          <strong>Not today</strong>
+          <small>I will continue tomorrow</small>
+        </span>
+      </button>
+    </div>
+
+    <!-- This field is shown only when the user saved money. -->
+    @if (saved()) {
+      <div class="field-group">
+        <label for="savedAmount">Amount saved</label>
+
+        <div class="amount-input-wrapper">
+          <span>{{ selectedChallenge.currency }}</span>
+
+          <input
+            id="savedAmount"
+            class="amount-input"
+            type="number"
+            min="1"
+            [ngModel]="amount()"
+            (ngModelChange)="updateAmount($event)"
+          />
+        </div>
+
+        <p class="helper-text">
+          Your planned amount is {{ selectedChallenge.currency }}
+          {{ selectedChallenge.amount }}.
+        </p>
+      </div>
+    } @else {
+      <!-- This field is shown only when the user did not save money. -->
+      <div class="field-group">
+        <label for="reason">Reason <span>(optional)</span></label>
+
+        <textarea
+          id="reason"
+          class="reason-input"
+          rows="3"
+          placeholder="Example: I had an unexpected expense."
+          [ngModel]="reason()"
+          (ngModelChange)="updateReason($event)"
+        ></textarea>
+
+        <p class="helper-text">
+          Missing one day is okay. The goal is to return to the habit.
+        </p>
+      </div>
+    }
+
+    <!-- This button saves today's check-in. -->
+    <button class="save-button" type="button" (click)="saveTodayCheckIn()">
+      {{ todayCheckIn() ? 'Update today’s check-in' : 'Save today’s check-in' }}
+    </button>
+  </section>
+} @else {
+  <!-- This message is shown while challenge data is unavailable. -->
+  <section class="loading-card">
+    <p>Loading your challenge...</p>
+  </section>
+}

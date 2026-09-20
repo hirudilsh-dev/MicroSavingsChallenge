@@ -1,0 +1,267 @@
+/* This is the main card for the check-in form. */
+.check-in-card {
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: var(--surface);
+}
+
+/* This row contains the heading and record status badge. */
+.check-in-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 24px;
+}
+
+/* This is the small label above the check-in title. */
+.eyebrow {
+  margin: 0 0 7px;
+  color: #0f766e;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+/* This is the check-in title. */
+h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  letter-spacing: -0.02em;
+}
+
+/* This text displays today's date. */
+.date-text {
+  margin: 7px 0 0;
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+/* This badge displays today's check-in status. */
+.status-badge {
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #166534;
+  background: #dcfce7;
+  font-size: 0.75rem;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* This variation is used when there is no record yet. */
+.status-badge.neutral {
+  color: #475569;
+  background: #e2e8f0;
+}
+
+/* This message confirms that a check-in was saved. */
+.success-message {
+  margin-bottom: 18px;
+  padding: 11px 13px;
+  border: 1px solid #86efac;
+  border-radius: 10px;
+  color: #166534;
+  background: #f0fdf4;
+  font-size: 0.9rem;
+  font-weight: 650;
+}
+
+/* This grid holds the two saving-status buttons. */
+.choice-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+/* This button lets the user choose whether they saved money. */
+.choice-button {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 13px;
+  color: var(--text);
+  background: #ffffff;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
+}
+
+/* This style highlights the selected saving-status button. */
+.choice-button.selected {
+  border-color: #0f766e;
+  background: #f0fdfa;
+}
+
+/* This effect gives feedback when a choice button is hovered. */
+.choice-button:hover {
+  transform: translateY(-1px);
+}
+
+/* This icon describes each saving-status choice. */
+.choice-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  font-size: 1rem;
+  font-weight: 900;
+}
+
+/* This green icon is used for the saved option. */
+.choice-icon.success {
+  color: #ffffff;
+  background: #16a34a;
+}
+
+/* This neutral icon is used for the not-saved option. */
+.choice-icon.muted {
+  color: #475569;
+  background: #e2e8f0;
+}
+
+/* This container stacks choice title and description. */
+.choice-button span:last-child {
+  display: grid;
+  gap: 3px;
+}
+
+/* This is the choice description text. */
+.choice-button small {
+  color: var(--muted);
+  font-size: 0.76rem;
+}
+
+/* This group contains one label, input, and helper message. */
+.field-group {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 22px;
+}
+
+/* This is the input label. */
+.field-group label {
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
+/* This style is used for optional label text. */
+.field-group label span {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* This wrapper joins the currency label and amount input. */
+.amount-input-wrapper {
+  display: flex;
+  overflow: hidden;
+  max-width: 320px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+/* This label displays the challenge currency. */
+.amount-input-wrapper span {
+  display: grid;
+  place-items: center;
+  padding: 0 13px;
+  border-right: 1px solid #cbd5e1;
+  color: #334155;
+  background: #f8fafc;
+  font-size: 0.86rem;
+  font-weight: 800;
+}
+
+/* This input allows the user to enter saved amount. */
+.amount-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 0;
+  outline: none;
+  color: var(--text);
+}
+
+/* This textarea allows the user to write a reason. */
+.reason-input {
+  width: 100%;
+  max-width: 560px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  color: var(--text);
+  resize: vertical;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+/* This effect highlights a focused textarea. */
+.reason-input:focus,
+.amount-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* This text explains the current form field. */
+.helper-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+/* This button saves the current check-in values. */
+.save-button {
+  width: 100%;
+  max-width: 330px;
+  padding: 12px 16px;
+  border: 0;
+  border-radius: 10px;
+  color: #ffffff;
+  background: #0f766e;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+/* This effect gives feedback when the save button is hovered. */
+.save-button:hover {
+  background: #115e59;
+  transform: translateY(-1px);
+}
+
+/* This card is displayed while challenge data is unavailable. */
+.loading-card {
+  padding: 26px;
+  border: 1px dashed var(--border);
+  border-radius: 14px;
+  color: var(--muted);
+  background: var(--surface);
+  text-align: center;
+}
+
+/* These styles adjust the layout for mobile screens. */
+@media (max-width: 580px) {
+  .check-in-card {
+    padding: 22px 18px;
+  }
+
+  .check-in-header {
+    flex-direction: column;
+  }
+
+  .choice-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .save-button {
+    max-width: none;
+  }
+}

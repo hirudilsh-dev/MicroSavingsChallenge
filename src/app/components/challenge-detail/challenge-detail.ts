@@ -1,15 +1,18 @@
 // This component displays the main page for one savings challenge.
 
+// This component displays the main page for one savings challenge.
+
 import { DecimalPipe } from '@angular/common';
 import { Component, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CheckIn } from './check-in/check-in';
 import { Savings } from '../../services/savings';
 
 type ChallengeTab = 'check-in' | 'dashboard' | 'reflection';
 
 @Component({
   selector: 'app-challenge-detail',
-  imports: [DecimalPipe],
+  imports: [DecimalPipe, CheckIn],
   templateUrl: './challenge-detail.html',
   styleUrl: './challenge-detail.css'
 })
