@@ -1,0 +1,229 @@
+/* This container keeps the form centered and responsive. */
+.page-shell {
+  width: min(100% - 32px, 760px);
+  margin: 0 auto;
+  padding: 40px 0 56px;
+}
+
+/* This card contains all form content. */
+.form-card {
+  padding: 34px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background: var(--surface);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.07);
+}
+
+/* This section contains the back button, title, and description. */
+.page-header {
+  margin-bottom: 28px;
+}
+
+/* This button returns the user to the home page. */
+.back-button {
+  margin-bottom: 22px;
+  padding: 0;
+  border: 0;
+  color: var(--primary);
+  background: transparent;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+/* This label provides context above the page title. */
+.eyebrow {
+  margin: 0 0 8px;
+  color: var(--primary);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+/* This is the page title. */
+h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  letter-spacing: -0.04em;
+}
+
+/* This is the page description. */
+.subtitle {
+  max-width: 560px;
+  margin: 10px 0 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* This group keeps one label, input, and helper text together. */
+.field-group {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+/* This style is shared by normal labels and radio-group labels. */
+.field-group label,
+.field-label {
+  color: #334155;
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
+/* This style is used for optional text beside labels. */
+.field-group label span {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* This grid places related inputs side by side on wide screens. */
+.two-column-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+/* This is the standard input and select style. */
+.text-input {
+  width: 100%;
+  min-height: 46px;
+  padding: 10px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  outline: none;
+  color: var(--text);
+  background: #ffffff;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+/* This effect shows the currently focused input. */
+.text-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* This container holds the daily and weekly options. */
+.period-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* This label behaves like a selectable frequency card. */
+.period-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid #cbd5e1;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: border-color 160ms ease, background 160ms ease;
+}
+
+/* This style highlights the selected frequency option. */
+.period-option.selected {
+  border-color: var(--primary);
+  background: #eff6ff;
+}
+
+/* This container stacks frequency title and description. */
+.period-option span {
+  display: grid;
+  gap: 3px;
+}
+
+/* This describes the frequency option. */
+.period-option small {
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 500;
+}
+
+/* This text explains a form field. */
+.helper-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+/* This text appears when a form value is invalid. */
+.error-text {
+  color: var(--danger);
+  font-size: 0.8rem;
+}
+
+/* This row contains the cancel and submit buttons. */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 30px;
+}
+
+/* This is the main submit button. */
+.primary-button {
+  border: 0;
+  border-radius: 10px;
+  padding: 11px 16px;
+  color: #ffffff;
+  background: var(--primary);
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 160ms ease, transform 160ms ease;
+}
+
+/* This effect gives feedback on the main button. */
+.primary-button:hover:not(:disabled) {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+
+/* This style indicates that the submit button cannot be used yet. */
+.primary-button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* This is the secondary cancel button. */
+.secondary-button {
+  border: 1px solid #cbd5e1;
+  border-radius: 10px;
+  padding: 11px 16px;
+  color: #334155;
+  background: #ffffff;
+  font-weight: 750;
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+
+/* This effect gives feedback on the cancel button. */
+.secondary-button:hover {
+  background: #f8fafc;
+}
+
+/* These styles improve the form on small screens. */
+@media (max-width: 620px) {
+  .page-shell {
+    width: min(100% - 24px, 760px);
+    padding-top: 20px;
+  }
+
+  .form-card {
+    padding: 24px 18px;
+    border-radius: 16px;
+  }
+
+  .two-column-grid,
+  .period-options {
+    grid-template-columns: 1fr;
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .form-actions button {
+    width: 100%;
+  }
+}

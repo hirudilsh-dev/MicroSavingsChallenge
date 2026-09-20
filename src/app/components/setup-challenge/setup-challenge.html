@@ -1,1 +1,180 @@
-<p>setup-challenge works!</p>
+<!-- This page contains the form used to create a savings challenge. -->
+<main class="page-shell">
+  <section class="form-card">
+    <div class="page-header">
+      <button class="back-button" type="button" (click)="cancel()">
+        ← Back
+      </button>
+
+      <p class="eyebrow">NEW SAVINGS PLAN</p>
+      <h1>Create a challenge</h1>
+
+      <p class="subtitle">
+        Start small, stay consistent, and let every saving move you toward a goal.
+      </p>
+    </div>
+
+    <!-- This form calls createChallenge when the user submits valid data. -->
+    <form #challengeForm="ngForm" (ngSubmit)="createChallenge()" novalidate>
+      <div class="field-group">
+        <label for="name">Challenge name</label>
+
+        <input
+          #nameControl="ngModel"
+          id="name"
+          name="name"
+          class="text-input"
+          type="text"
+          placeholder="Example: Daily Rs. 100"
+          [(ngModel)]="name"
+          required
+          maxlength="60"
+        />
+
+        <!-- This message appears after the user touches an invalid name field. -->
+        @if (nameControl.invalid && nameControl.touched) {
+          <small class="error-text">Please enter a challenge name.</small>
+        }
+      </div>
+
+      <div class="two-column-grid">
+        <div class="field-group">
+          <label for="amount">Amount to save</label>
+
+          <input
+            #amountControl="ngModel"
+            id="amount"
+            name="amount"
+            class="text-input"
+            type="number"
+            placeholder="100"
+            [(ngModel)]="amount"
+            required
+            min="1"
+          />
+
+          <!-- This message appears when the amount is not valid. -->
+          @if (amountControl.invalid && amountControl.touched) {
+            <small class="error-text">Enter an amount greater than zero.</small>
+          }
+        </div>
+
+        <div class="field-group">
+          <label for="currency">Currency</label>
+
+          <select
+            id="currency"
+            name="currency"
+            class="text-input"
+            [(ngModel)]="currency"
+          >
+            <option value="LKR">LKR — Sri Lankan Rupee</option>
+            <option value="USD">USD — US Dollar</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field-group">
+        <span class="field-label">Saving frequency</span>
+
+        <div class="period-options">
+          <label
+            class="period-option"
+            [class.selected]="period === 'daily'"
+          >
+            <input
+              type="radio"
+              name="period"
+              value="daily"
+              [(ngModel)]="period"
+            />
+
+            <span>
+              <strong>Daily</strong>
+              <small>Save a small amount every day</small>
+            </span>
+          </label>
+
+          <label
+            class="period-option"
+            [class.selected]="period === 'weekly'"
+          >
+            <input
+              type="radio"
+              name="period"
+              value="weekly"
+              [(ngModel)]="period"
+            />
+
+            <span>
+              <strong>Weekly</strong>
+              <small>Save once every week</small>
+            </span>
+          </label>
+        </div>
+      </div>
+
+      <div class="two-column-grid">
+        <div class="field-group">
+          <label for="startDate">Start date</label>
+
+          <input
+            id="startDate"
+            name="startDate"
+            class="text-input"
+            type="date"
+            [(ngModel)]="startDate"
+            required
+          />
+        </div>
+
+        <div class="field-group">
+          <label for="targetDays">Target days <span>(optional)</span></label>
+
+          <input
+            id="targetDays"
+            name="targetDays"
+            class="text-input"
+            type="number"
+            placeholder="30"
+            [(ngModel)]="targetDays"
+            min="1"
+          />
+        </div>
+      </div>
+
+      <div class="field-group">
+        <label for="targetAmount">Target amount <span>(optional)</span></label>
+
+        <input
+          id="targetAmount"
+          name="targetAmount"
+          class="text-input"
+          type="number"
+          placeholder="Example: 3000"
+          [(ngModel)]="targetAmount"
+          min="1"
+        />
+
+        <p class="helper-text">
+          A target amount helps you see your progress on the dashboard.
+        </p>
+      </div>
+
+      <!-- These buttons let the user cancel or create the challenge. -->
+      <div class="form-actions">
+        <button class="secondary-button" type="button" (click)="cancel()">
+          Cancel
+        </button>
+
+        <button
+          class="primary-button"
+          type="submit"
+          [disabled]="challengeForm.invalid"
+        >
+          Create challenge
+        </button>
+      </div>
+    </form>
+  </section>
+</main>

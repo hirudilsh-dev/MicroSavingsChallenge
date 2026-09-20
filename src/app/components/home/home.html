@@ -1,1 +1,67 @@
-<p>home works!</p>
+<!-- This is the main home page content. -->
+<main class="page-shell">
+  <!-- This section introduces the purpose of the application. -->
+  <section class="hero-card">
+    <p class="eyebrow">BUILD A BETTER MONEY HABIT</p>
+
+    <h1>Micro-Savings Challenge</h1>
+
+    <p class="hero-text">
+      Save a small amount every day or every week. Build a consistent habit
+      and watch your progress grow.
+    </p>
+
+    <!-- This button opens the new challenge form. -->
+    <button class="primary-button" type="button" (click)="startNewChallenge()">
+      Create a challenge
+    </button>
+  </section>
+
+  <!-- This block is shown when the user has one or more challenges. -->
+  @if (challenges().length > 0) {
+    <section class="challenges-section">
+      <div class="section-heading">
+        <div>
+          <p class="section-eyebrow">YOUR PROGRESS</p>
+          <h2>Your challenges</h2>
+        </div>
+
+        <span class="challenge-count">
+          {{ challenges().length }}
+          {{ challenges().length === 1 ? 'challenge' : 'challenges' }}
+        </span>
+      </div>
+
+      <div class="challenge-grid">
+        <!-- This loop creates one clickable card for each challenge. -->
+        @for (challenge of challenges(); track challenge.id) {
+          <button
+            class="challenge-card"
+            type="button"
+            (click)="openChallenge(challenge.id)"
+          >
+            <span class="card-icon">💰</span>
+
+            <span class="card-content">
+              <strong>{{ challenge.name }}</strong>
+
+              <span>
+                {{ challenge.period === 'daily' ? 'Daily' : 'Weekly' }}
+                · {{ challenge.currency }} {{ challenge.amount }}
+              </span>
+            </span>
+
+            <span class="card-arrow">→</span>
+          </button>
+        }
+      </div>
+    </section>
+  } @else {
+    <!-- This block is shown before the first challenge is created. -->
+    <section class="empty-state">
+      <span class="empty-icon">🌱</span>
+      <h2>Your first small step starts here</h2>
+      <p>Create a challenge and begin tracking your savings habit.</p>
+    </section>
+  }
+</main>

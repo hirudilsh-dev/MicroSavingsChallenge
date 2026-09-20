@@ -1,0 +1,208 @@
+/* This container keeps home page content centered and responsive. */
+.page-shell {
+  width: min(100% - 32px, 980px);
+  margin: 0 auto;
+  padding: 40px 0 56px;
+}
+
+/* This is the main introduction card. */
+.hero-card {
+  padding: 48px;
+  border-radius: 24px;
+  color: #ffffff;
+  background:
+    radial-gradient(circle at top right, rgba(96, 165, 250, 0.45), transparent 35%),
+    linear-gradient(135deg, #1d4ed8, #2563eb 58%, #4f46e5);
+  box-shadow: 0 20px 45px rgba(37, 99, 235, 0.22);
+}
+
+/* This style is used for small uppercase labels inside the hero card. */
+.eyebrow {
+  margin: 0 0 10px;
+  color: #bfdbfe;
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+}
+
+/* This is the main page title. */
+.hero-card h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.35rem);
+  letter-spacing: -0.04em;
+}
+
+/* This is the supporting text below the main title. */
+.hero-text {
+  max-width: 620px;
+  margin: 16px 0 26px;
+  color: #dbeafe;
+  font-size: 1.05rem;
+  line-height: 1.7;
+}
+
+/* This button is used for the main action. */
+.primary-button {
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 18px;
+  color: #1d4ed8;
+  background: #ffffff;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 160ms ease, box-shadow 160ms ease;
+}
+
+/* This effect gives feedback when the user hovers over the button. */
+.primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+}
+
+/* This section contains the saved challenge list. */
+.challenges-section {
+  margin-top: 38px;
+}
+
+/* This is the header row above the challenge cards. */
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+/* This style is used for the label above the section title. */
+.section-eyebrow {
+  margin: 0 0 8px;
+  color: var(--primary);
+  font-size: 0.73rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+/* This is the title above the challenge card grid. */
+.section-heading h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* This badge displays the number of saved challenges. */
+.challenge-count {
+  padding: 6px 10px;
+  border-radius: 999px;
+  color: #475569;
+  background: #e2e8f0;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+/* This grid automatically adjusts the number of cards based on screen size. */
+.challenge-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px;
+}
+
+/* This is one clickable challenge card. */
+.challenge-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 18px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  color: var(--text);
+  background: var(--surface);
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+  transition: transform 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
+}
+
+/* This hover effect makes cards feel interactive. */
+.challenge-card:hover {
+  transform: translateY(-3px);
+  border-color: #93c5fd;
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.09);
+}
+
+/* This icon gives every challenge card a visual identity. */
+.card-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  border-radius: 12px;
+  background: #eff6ff;
+  font-size: 1.2rem;
+}
+
+/* This container holds challenge title and amount details. */
+.card-content {
+  display: grid;
+  gap: 4px;
+  flex: 1;
+}
+
+/* This style is used for the smaller challenge detail line. */
+.card-content span {
+  color: var(--muted);
+  font-size: 0.84rem;
+}
+
+/* This arrow indicates that the card can be opened. */
+.card-arrow {
+  color: var(--primary);
+  font-size: 1.25rem;
+}
+
+/* This section appears when the user has no saved challenges yet. */
+.empty-state {
+  margin-top: 34px;
+  padding: 34px 24px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 18px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.65);
+  text-align: center;
+}
+
+/* This is the empty-state emoji icon. */
+.empty-icon {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 2rem;
+}
+
+/* This is the empty-state title. */
+.empty-state h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 1.2rem;
+}
+
+/* This is the empty-state description. */
+.empty-state p {
+  margin: 8px 0 0;
+}
+
+/* These styles improve the page layout on smaller screens. */
+@media (max-width: 600px) {
+  .page-shell {
+    width: min(100% - 24px, 980px);
+    padding-top: 20px;
+  }
+
+  .hero-card {
+    padding: 32px 24px;
+    border-radius: 18px;
+  }
+
+  .section-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+}
