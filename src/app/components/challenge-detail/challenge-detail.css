@@ -299,6 +299,178 @@
   cursor: pointer;
 }
 
+/* This button opens the challenge edit form. */
+.edit-button {
+  align-self: flex-start;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 9px;
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.12);
+  font-size: 0.84rem;
+  font-weight: 750;
+  cursor: pointer;
+  transition: background 160ms ease;
+}
+
+/* This effect highlights the edit button on hover. */
+.edit-button:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* This card contains the edit challenge form. */
+.edit-card {
+  margin-top: 22px;
+  padding: 26px;
+  border: 1px solid #bfdbfe;
+  border-radius: 18px;
+  background: #eff6ff;
+}
+
+/* This row contains the edit form title and close button. */
+.edit-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+/* This is the small label above edit form title. */
+.edit-eyebrow {
+  margin: 0 0 6px;
+  color: #1d4ed8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+}
+
+/* This is the edit form title. */
+.edit-header h2 {
+  margin: 0;
+  color: #1e3a8a;
+  font-size: 1.2rem;
+}
+
+/* This button closes the edit form. */
+.close-edit-button {
+  width: 32px;
+  height: 32px;
+  border: 0;
+  border-radius: 8px;
+  color: #1e3a8a;
+  background: transparent;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* This group keeps a form label and input together. */
+.form-field {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 18px;
+}
+
+/* This style is used for regular field labels. */
+.form-field label,
+.form-label {
+  color: #334155;
+  font-size: 0.88rem;
+  font-weight: 750;
+}
+
+/* This style is used for optional field labels. */
+.form-field label span {
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* This style is shared by text, number, select, and date inputs. */
+.form-input {
+  width: 100%;
+  min-height: 44px;
+  padding: 9px 11px;
+  border: 1px solid #93c5fd;
+  border-radius: 10px;
+  outline: none;
+  color: var(--text);
+  background: #ffffff;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+/* This effect highlights a focused edit input. */
+.form-input:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.14);
+}
+
+/* This grid places related edit fields side by side. */
+.edit-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* This row contains the daily and weekly selection options. */
+.frequency-options {
+  display: flex;
+  gap: 10px;
+}
+
+/* This label behaves like a selectable frequency option. */
+.frequency-option {
+  padding: 9px 12px;
+  border: 1px solid #93c5fd;
+  border-radius: 9px;
+  color: #1e3a8a;
+  background: #ffffff;
+  font-size: 0.86rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* This style highlights the selected frequency option. */
+.frequency-option.selected {
+  border-color: #2563eb;
+  background: #dbeafe;
+}
+
+/* This row contains cancel and save actions. */
+.edit-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* This button cancels the edit form. */
+.cancel-edit-button {
+  padding: 10px 14px;
+  border: 1px solid #93c5fd;
+  border-radius: 9px;
+  color: #1e3a8a;
+  background: #ffffff;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+/* This button saves the edited challenge. */
+.save-edit-button {
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 9px;
+  color: #ffffff;
+  background: #2563eb;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+/* This effect highlights the save button on hover. */
+.save-edit-button:hover {
+  background: #1d4ed8;
+}
+
 /* These styles adjust the page for smaller screens. */
 @media (max-width: 680px) {
   .page-shell {
@@ -327,5 +499,17 @@
   .page-actions {
     flex-direction: column;
     gap: 4px;
+  }
+
+  .edit-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .edit-actions {
+    flex-direction: column-reverse;
+  }
+
+  .edit-actions button {
+    width: 100%;
   }
 }

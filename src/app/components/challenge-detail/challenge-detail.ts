@@ -9,12 +9,13 @@ import { CheckIn } from './check-in/check-in';
 import { Savings } from '../../services/savings';
 import { Dashboard } from './dashboard/dashboard';
 import { Reflection } from './reflection/reflection';
+import { FormsModule } from '@angular/forms';
 
 type ChallengeTab = 'check-in' | 'dashboard' | 'reflection';
 
 @Component({
   selector: 'app-challenge-detail',
-  imports: [DecimalPipe, CheckIn, Dashboard, Reflection],
+  imports: [DecimalPipe, FormsModule, CheckIn, Dashboard, Reflection],
   templateUrl: './challenge-detail.html',
   styleUrl: './challenge-detail.css'
 })
@@ -30,6 +31,18 @@ export class ChallengeDetail {
 
   // This signal stores the tab currently selected by the user.
   readonly activeTab = signal<ChallengeTab>('check-in');
+
+  // This signal controls whether the edit form is visible.
+  readonly isEditing = signal(false);
+
+  // These fields hold editable challenge values.
+  editName = '';
+  editAmount: number | null = null;
+  editPeriod: 'daily' | 'weekly' = 'daily';
+  editStartDate = '';
+  editTargetDays: number | null = null;
+  editTargetAmount: number | null = null;
+  editCurrency = 'LKR';
 
   // This value reads the challenge ID from the URL one time.
   readonly challengeId = this.activatedRoute.snapshot.paramMap.get('id') ?? '';
@@ -94,5 +107,72 @@ export class ChallengeDetail {
 
     // Return the user to the home page after deletion.
     this.router.navigate(['/']);
+  }
+
+  // This function opens the edit form and loads current challenge values.
+  openEditForm(): void {
+    const selectedChallenge = this.challenge();
+
+    // Stop when the selected challenge does not exist.
+    if (!selectedChallenge) {
+      return;
+    }
+
+    // Load existing values into the editable form fields.
+    this.editName = selectedChallenge.name;
+    this.editAmount = selectedChallenge.amount;
+    this.editPeriod = selectedChallenge.period;
+    this.editStartDate = selectedChallenge.startDate;
+    this.editTargetDays = selectedChallenge.targetDays ?? null;
+    this.editTargetAmount = selectedChallenge.targetAmount ?? null;
+    this.editCurrency = selectedChallenge.currency;
+
+    // Show the edit form.
+    this.isEditing.set(true);
+  }
+
+  // This function closes the edit form without changing challenge data.
+  cancelEdit(): void {
+    this.isEditing.set(false);
+  }
+
+  // This function validates and saves the edited challenge values.
+  saveChallengeChanges(): void {
+    const selectedChallenge = this.challenge();
+
+    // Stop when the challenge does not exist.
+    if (!selectedChallenge) {
+      return;
+    }
+
+    // Stop when required form values are invalid.
+    if (!this.editName.trim() || !this.editAmount || this.editAmount <= 0) {
+      alert('Please enter a valid challenge name and saving amount.');
+      return;
+    }
+
+    // Create a new object instead of changing the old challenge directly.
+    const updatedChallenge = {
+      ...selectedChallenge,
+      name: this.editName.trim(),
+      amount: this.editAmount,
+      period: this.editPeriod,
+      startDate: this.editStartDate,
+      targetDays:
+        this.editTargetDays && this.editTargetDays > 0
+          ? this.editTargetDays
+          : undefined,
+      targetAmount:
+        this.editTargetAmount && this.editTargetAmount > 0
+          ? this.editTargetAmount
+          : undefined,
+      currency: this.editCurrency
+    };
+
+    // Save the updated challenge through the savings service.
+    this.savingsService.updateChallenge(updatedChallenge);
+
+    // Close the edit form after successful save.
+    this.isEditing.set(false);
   }
 }

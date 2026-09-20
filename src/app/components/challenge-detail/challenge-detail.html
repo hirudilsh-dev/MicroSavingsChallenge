@@ -20,6 +20,11 @@
         </p>
       </div>
 
+      <!-- This button opens the edit challenge form. -->
+      <button class="edit-button" type="button" (click)="openEditForm()">
+        Edit challenge
+      </button>
+
       <!-- This card provides a quick total saved summary. -->
       <div class="total-card">
         <span>Total saved</span>
@@ -32,6 +37,160 @@
         }
       </div>
     </section>
+
+    <!-- This form appears when the user chooses to edit the challenge. -->
+    @if (isEditing()) {
+      <section class="edit-card">
+        <div class="edit-header">
+          <div>
+            <p class="edit-eyebrow">EDIT CHALLENGE</p>
+            <h2>Update your savings plan</h2>
+          </div>
+
+          <button
+            class="close-edit-button"
+            type="button"
+            aria-label="Close edit form"
+            (click)="cancelEdit()"
+          >
+            ×
+          </button>
+        </div>
+
+        <!-- This form saves updated challenge details. -->
+        <form (ngSubmit)="saveChallengeChanges()">
+          <div class="form-field">
+            <label for="editName">Challenge name</label>
+
+            <input
+              id="editName"
+              name="editName"
+              class="form-input"
+              type="text"
+              maxlength="60"
+              [(ngModel)]="editName"
+              required
+            />
+          </div>
+
+          <div class="edit-grid">
+            <div class="form-field">
+              <label for="editAmount">Amount to save</label>
+
+              <input
+                id="editAmount"
+                name="editAmount"
+                class="form-input"
+                type="number"
+                min="1"
+                [(ngModel)]="editAmount"
+                required
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="editCurrency">Currency</label>
+
+              <select
+                id="editCurrency"
+                name="editCurrency"
+                class="form-input"
+                [(ngModel)]="editCurrency"
+              >
+                <option value="LKR">LKR — Sri Lankan Rupee</option>
+                <option value="USD">USD — US Dollar</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-field">
+            <span class="form-label">Saving frequency</span>
+
+            <div class="frequency-options">
+              <label
+                class="frequency-option"
+                [class.selected]="editPeriod === 'daily'"
+              >
+                <input
+                  type="radio"
+                  name="editPeriod"
+                  value="daily"
+                  [(ngModel)]="editPeriod"
+                />
+                Daily
+              </label>
+
+              <label
+                class="frequency-option"
+                [class.selected]="editPeriod === 'weekly'"
+              >
+                <input
+                  type="radio"
+                  name="editPeriod"
+                  value="weekly"
+                  [(ngModel)]="editPeriod"
+                />
+                Weekly
+              </label>
+            </div>
+          </div>
+
+          <div class="edit-grid">
+            <div class="form-field">
+              <label for="editStartDate">Start date</label>
+
+              <input
+                id="editStartDate"
+                name="editStartDate"
+                class="form-input"
+                type="date"
+                [(ngModel)]="editStartDate"
+                required
+              />
+            </div>
+
+            <div class="form-field">
+              <label for="editTargetDays">Target days <span>(optional)</span></label>
+
+              <input
+                id="editTargetDays"
+                name="editTargetDays"
+                class="form-input"
+                type="number"
+                min="1"
+                [(ngModel)]="editTargetDays"
+              />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="editTargetAmount">
+              Target amount <span>(optional)</span>
+            </label>
+
+            <input
+              id="editTargetAmount"
+              name="editTargetAmount"
+              class="form-input"
+              type="number"
+              min="1"
+              [(ngModel)]="editTargetAmount"
+            />
+          </div>
+
+          <!-- These buttons cancel or save the edit form. -->
+          <div class="edit-actions">
+            <button class="cancel-edit-button" type="button" (click)="cancelEdit()">
+              Cancel
+            </button>
+
+            <button class="save-edit-button" type="submit">
+              Save changes
+            </button>
+          </div>
+        </form>
+      </section>
+    }
 
     <!-- Show goal progress only when the user provided a target amount. -->
     @if (selectedChallenge.targetAmount) {

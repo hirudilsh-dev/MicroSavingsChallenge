@@ -218,4 +218,18 @@ export class Savings {
     this.saveData(this.checkInsKey, this.checkInsSignal());
     this.saveData(this.reflectionsKey, this.reflectionsSignal());
   }
+
+  // This function updates one existing challenge and saves the new data.
+  updateChallenge(updatedChallenge: Challenge): void {
+    this.challengesSignal.update((currentChallenges) =>
+      currentChallenges.map((challenge) =>
+        challenge.id === updatedChallenge.id
+          ? updatedChallenge
+          : challenge
+      )
+    );
+
+    // Save the updated challenge list to LocalStorage.
+    this.saveData(this.challengesKey, this.challengesSignal());
+  }
 }
