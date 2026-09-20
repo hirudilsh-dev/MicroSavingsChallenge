@@ -214,16 +214,39 @@
   line-height: 1.6;
 }
 
-/* This button opens the new challenge page. */
+/* This row contains secondary page actions. */
+.page-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-top: 24px;
+}
+
+/* This button opens the new challenge setup page. */
 .create-another-button {
-  display: block;
-  margin: 24px auto 0;
   padding: 10px 14px;
   border: 0;
   color: var(--primary);
   background: transparent;
   font-weight: 750;
   cursor: pointer;
+}
+
+/* This button starts the permanent challenge deletion flow. */
+.delete-button {
+  padding: 10px 14px;
+  border: 0;
+  color: var(--danger);
+  background: transparent;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+/* This effect gives visual feedback for the delete button. */
+.delete-button:hover {
+  color: #b91c1c;
+  text-decoration: underline;
 }
 
 /* This container centers the not-found content. */
@@ -299,5 +322,10 @@
 
   .tab-list {
     overflow-x: auto;
+  }
+
+  .page-actions {
+    flex-direction: column;
+    gap: 4px;
   }
 }

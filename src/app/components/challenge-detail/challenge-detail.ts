@@ -68,4 +68,31 @@ export class ChallengeDetail {
   createAnotherChallenge(): void {
     this.router.navigate(['/setup']);
   }
+
+  // This function asks for confirmation and deletes the current challenge.
+  deleteCurrentChallenge(): void {
+    const selectedChallenge = this.challenge();
+
+    // Stop when the selected challenge does not exist.
+    if (!selectedChallenge) {
+      return;
+    }
+
+    // Ask the user to confirm this permanent action.
+    const shouldDelete = window.confirm(
+      `Delete "${selectedChallenge.name}"?\n\n` +
+      'This will permanently remove the challenge, its check-ins, and its reflection.'
+    );
+
+    // Stop when the user cancels the confirmation dialog.
+    if (!shouldDelete) {
+      return;
+    }
+
+    // Delete the selected challenge through the savings service.
+    this.savingsService.deleteChallenge(selectedChallenge.id);
+
+    // Return the user to the home page after deletion.
+    this.router.navigate(['/']);
+  }
 }

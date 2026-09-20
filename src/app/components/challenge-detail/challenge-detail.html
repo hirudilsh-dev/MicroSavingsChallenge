@@ -113,14 +113,24 @@
       }
     </section>
 
-    <!-- This secondary action lets the user create another plan. -->
-    <button
-      class="create-another-button"
-      type="button"
-      (click)="createAnotherChallenge()"
-    >
-      + Create another challenge
-    </button>
+    <!-- These actions let the user create another challenge or delete this one. -->
+    <div class="page-actions">
+      <button
+        class="create-another-button"
+        type="button"
+        (click)="createAnotherChallenge()"
+      >
+        + Create another challenge
+      </button>
+
+      <button
+        class="delete-button"
+        type="button"
+        (click)="deleteCurrentChallenge()"
+      >
+        Delete this challenge
+      </button>
+    </div>
   </main>
 } @else {
   <!-- This page appears when a challenge ID does not exist. -->

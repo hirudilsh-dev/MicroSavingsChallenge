@@ -193,4 +193,29 @@ export class Savings {
 
     return { current, longest };
   }
+
+  // This function deletes a challenge and all data connected to it.
+  deleteChallenge(challengeId: string): void {
+    // Remove the selected challenge from the challenges list.
+    this.challengesSignal.update((currentChallenges) =>
+      currentChallenges.filter((challenge) => challenge.id !== challengeId)
+    );
+
+    // Remove every check-in record connected to the deleted challenge.
+    this.checkInsSignal.update((currentCheckIns) =>
+      currentCheckIns.filter((checkIn) => checkIn.challengeId !== challengeId)
+    );
+
+    // Remove the reflection connected to the deleted challenge.
+    this.reflectionsSignal.update((currentReflections) =>
+      currentReflections.filter(
+        (reflection) => reflection.challengeId !== challengeId
+      )
+    );
+
+    // Save all updated lists to LocalStorage.
+    this.saveData(this.challengesKey, this.challengesSignal());
+    this.saveData(this.checkInsKey, this.checkInsSignal());
+    this.saveData(this.reflectionsKey, this.reflectionsSignal());
+  }
 }
