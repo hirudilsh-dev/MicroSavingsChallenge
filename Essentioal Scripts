@@ -1,0 +1,15 @@
+Create Project
+
+Generate Components
+    ng g c components/home --skip-tests
+    ng g c components/setup-challenge --skip-tests
+    ng g c components/challenge-detail --skip-tests
+    ng g c components/challenge-detail/check-in --skip-tests
+    ng g c components/challenge-detail/dashboard --skip-tests
+    ng g c components/challenge-detail/reflection --skip-tests
+
+Generate Model 
+    mkdir src\app\models
+
+Generate Service
+    ng g s services/savings --skip-tests

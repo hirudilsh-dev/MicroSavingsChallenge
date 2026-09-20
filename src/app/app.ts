@@ -1,4 +1,6 @@
-import { Component, signal } from '@angular/core';
+// This is the root component of the application.
+
+import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,5 +10,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('micro-savings-challenge');
+  // RouterOutlet displays the component for the current URL.
 }
